@@ -1,0 +1,13 @@
+.grupo
+{
+	height: 20px;
+	overflow: hidden;
+	background: blue;
+	transition: all 350ms;
+}
+.titulo{height: 20px;}
+.item
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}

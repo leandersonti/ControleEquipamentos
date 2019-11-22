@@ -1,0 +1,366 @@
+*{margin: 0;padding: 0;}
+
+.panel-defalt{
+    border-color: #ccc;
+
+}
+
+.panel{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(41, 38, 38, 0.05);
+}
+
+/*botao filtrar*/
+input[name="filtro"],input[name="submit"]{
+    width: 120px;
+}
+
+#tabelalotacao{
+    
+    border:none;
+}
+#tabelalotacao tr{
+    
+    border:none;
+}
+#tabelalotacao tr td{
+    border:none;
+}
+
+/* Daqui pra baixo é tudo culpa do Cley */
+
+input[name=unidade]
+{
+    display: none;
+}
+
+#dt_fim{margin-top: 32px}
+
+#formulario_escondido
+{
+    height: 0;
+    display: none;
+    /*overflow: hidden;*/
+    transition: all 300ms;
+    -webkit-animation: aparece 2s;
+}
+
+#field
+{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+#field legend
+{
+    width: max-content;
+}
+
+#campoQtdd
+{
+    height: 0;
+    overflow: hidden;
+    transition: all 300ms;
+}
+
+#lista
+{
+    /*width: 175px;*/
+    padding: 0;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+#groupEmprestimo
+{
+    height: 0;
+    overflow: hidden;
+    transition: all 300ms;
+}
+
+#brasao
+{
+    width: 50px;
+    height: auto;
+}
+
+#quantitativo
+{
+    width: max-content;
+    margin-left: auto;
+    margin-right: 5px;
+    color: dimgrey;
+}
+
+#cont-olho
+{
+    width: 38px;
+    height: 38px;
+}
+
+#bt-olho,#bt-olho-confirm
+{
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    background-size: 76%;
+    border-color: : #a9a9a9;
+    background-color: #a9a9a9;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-animation: olho 500ms;
+    background-image: url("../imagens/icons/view.svg");
+}
+
+.viewUsuario{display: none;}
+
+.img-100
+{
+    width: 100%;
+    height: 100%;
+}
+
+.labelzinha{color: #696969;}
+
+.title
+{
+    width: 100%;
+    color: #465753;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.radios,.radios2
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.radios{width: 150px;}
+.radios2{width: 200px;}
+
+.table
+{
+    width: 100%;
+}
+
+.pagina
+{
+    height: 0;
+    overflow: hidden;
+    transition: all 400ms ease-out;
+}
+
+.linha,.linha-cabecalho
+{
+    height: 35px;
+    display: flex;
+    padding: 0 5px; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.linha-cabecalho
+{
+    /*height: auto;*/
+    font-weight: bold;
+    background: #E6E6FA;
+}
+
+.cor0{background: #F0F8FF;}
+.cor1{background: #FFFFFF;}
+
+.coluna
+{
+    width: 150px;
+    text-align: center;
+}
+
+.coluna_icone
+{
+    width: 70px;
+    text-align: center;
+}
+
+.bt_remove
+{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    align-self: center;
+    background-size: cover;
+    background-image: url("../imagens/icons/delete-button.png");
+}
+
+.item
+{
+    display: flex;
+    padding: .375rem .75rem;
+    justify-content: space-between;
+}
+
+.divEquip{width: 120px;}
+
+.link:hover
+{
+    cursor: pointer;
+}
+
+.iconVolta
+{
+    height: 24.49px;
+}
+
+.icon
+{
+    width: 46px;
+    height: 25px;
+}
+
+.paginacao
+{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.paginacao>.btn:last-child{margin-left: 5px;}
+.paginacao>.btn:first-child{margin-right: 5px;}
+
+.botoes
+{
+    height: 53px;
+    display: flex;
+    max-width: 80%;
+    overflow-x: scroll;
+    flex-direction: row;
+}
+
+.botoes .btn
+{
+    margin: 0 2.5px;
+    max-height: 35px;
+}
+
+.pgAtual
+{
+    background: #00BFFF !important;
+    border-color: #00BFFF !important;
+}
+
+.botoes::-webkit-scrollbar {
+    width: 6px;
+    background: #dad7d7;
+}
+
+.botoes::-webkit-scrollbar-thumb {
+    background: skyblue;
+}
+
+.form-grid
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}
+
+.teamEmprestimo
+{
+    display: none;
+}
+
+.caixaInfo
+{
+    margin: 10px;
+    width: 400px;
+    min-height: 50px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+}
+
+.cabecaInfo
+{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    /*padding: 0 8px;*/
+    flex-direction: row;
+    align-items: baseline;
+    background-color: green;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid black;
+    justify-content: space-around;
+}
+
+@-webkit-keyframes olho
+{
+    from{ background-image: url('imagens/icons/view.svg'); }
+    to{ background-image: url('imagens/icons/closed-eye.svg'); }
+}
+
+@-webkit-keyframes aparece
+{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+}
+
+@-webkit-keyframes desaparece
+{
+    from{ opacity: 1; }
+    to{ opacity: 0; }
+}
+
+/* Esse CSS para o flex-box talvez nem seja utilizado 
+//Cley */
+
+#box
+{
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    transition: all 1s;
+    background-color: rgba(0, 0, 0, 0.72);
+}
+
+#box-menor
+{
+    width: 30rem;
+    height: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF;
+    margin-top: calc(50vh - 12.5rem);
+}
+
+.bt-fechar
+{
+    width: 20px;
+    height: 20px;
+    border: none;
+    float: right;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+/* Tô modificando alguns CSSs do LEANDERSON mas não quero
+mexer direto no codigo dele //Cley */
+
+.linha_Cabecalho_lotacao
+{
+    font-weight: bold;
+    background: #E6E6FA;
+}

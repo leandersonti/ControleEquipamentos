@@ -35,6 +35,8 @@ input[name="filtro"],input[name="submit"]{
 }
 /* Daqui pra baixo é tudo culpa do Cley */
 
+#tipoOculto{display: none;}
+
 input[name=unidade]
 {
     display: none;

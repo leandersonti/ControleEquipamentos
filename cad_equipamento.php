@@ -53,12 +53,20 @@ include_once('menu.php');
               <option value="Mini HD">Mini HD</option>
               <option value="Minicomputador">Minicomputador</option>
               <option value="Bateria para Nobreak">Bateria para Nobreak</option>
+              <option value="Outro">Outro</option>
             </select>
               <div class="invalid-feedback">
               Selecione o Tipo de Equipamento!
               </div>
           </div>
+        </div>
 
+        <div class="form-group" id="tipoOculto">
+          <label>Equipamento especifico</label>
+          <input type="text" name="tipoAlternativo" class="form-control trava2" placeholder="Equipamento">
+          <div class="invalid-feedback">
+                Informe o Equipamento!
+          </div>
         </div>
 
         <div class="form-row">
@@ -88,7 +96,6 @@ include_once('menu.php');
               </div>
           </div>
 
-          <!-- trabalhar a parte oculta-->
         </div>
 
         <div class="form-group" id="oculto">

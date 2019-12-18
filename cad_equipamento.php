@@ -4,7 +4,6 @@ include_once('topoLogo.php');
 include_once('menu.php');
 ?>
 
-
 <body>
 
 	<div style="width:50%; margin:100px auto" class="panel panel-defalt">
@@ -72,7 +71,7 @@ include_once('menu.php');
           </div>
           <div class="form-group col-md-6">
             <label for="inputEstado">Marca</label>
-            <select id="selecao" name="marca" class="form-control trava" onchange="revelarOutros()">
+            <select id="selecao" name="marca" class="form-control trava">
               <option selected value="">Escolher...</option>
               <option value="Dell">Dell</option>
               <option value="HP">HP</option>
@@ -91,23 +90,58 @@ include_once('menu.php');
 
           <!-- trabalhar a parte oculta-->
         </div>
-        <div class="form-group" id="oculto" style="display:none">
-          <label for="exampleFormControlTextarea1">Outros</label>
-          <input type="text" name="outraMarca"  class="form-control trava1" placeholder="Marca">
+
+        <div class="form-group" id="oculto">
+          <label>Outros</label>
+          <input type="text" name="outraMarca" class="form-control trava1" placeholder="Marca">
           <div class="invalid-feedback">
                 Informe a Marca do Equipamento!
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Condição do Equipamento</label>
-          <select name="condicao_entrada" class="form-control trava">
-            <option value="">Escolher...</option>
-            <option value="0">Novo</option>
-            <option value="1">Doação</option>
-          </select>
-          <div class="invalid-feedback">
-            selecione a Condição do Equipamento!
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Condição do Equipamento</label>
+            <select name="condicao_entrada" class="form-control trava">
+              <option value="">Escolher...</option>
+              <option value="0">Novo</option>
+              <option value="1">Doação</option>
+            </select>
+            <div class="invalid-feedback">
+              selecione a Condição do Equipamento!
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Status do Equipamento</label>
+            <select id="selectStatus" name="status" class="form-control" onchange="exibirLocacao()">
+              <option value="0" selected>Disponivel</option>
+              <option value="1">Alocado</option>
+              <option value="4">Alocado no interior</option>
+              <option value="2">Defeituoso</option>
+              <option value="3">Em manutenção</option>
+            </select>
+            <div class="invalid-feedback">
+              selecione o Status do equipamento!
+            </div>
+          </div>
+        </div>
+
+        <div id="dados-locacao" class="form-row">
+          <div class="form-group col-md-6">
+            <label>Locação</label>
+            <input type="text" name="local_equipamento" class="form-control" placeholder="Setor/Unidade">
+            <div class="invalid-feedback">
+              indique a locação do equipamento
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Responsável</label>
+            <input type="text" name="responsavel" class="form-control" placeholder="Responsável">
+            <div class="invalid-feedback">
+              indique a locação do equipamento
+            </div>
           </div>
         </div>
 
@@ -122,48 +156,6 @@ include_once('menu.php');
   </fieldset>
 </body>
 
-<script type="text/javascript">
-  function exibirCampo(op)
-  {
-    if (op==0)
-    {
-      document.getElementById('campoQtdd').style.height="69.65px";
-      document.getElementById('campoSerie').setAttribute("readonly","true");
-      document.getElementById('inputQtdd').value = "2";
-      document.getElementById('submit').innerText="Próximo";
-    }
-    else
-    {
-      document.getElementById('campoSerie').removeAttribute("readonly");
-      document.getElementById('campoQtdd').style.height="0";
-      document.getElementById('inputQtdd').value = "1";
-      document.getElementById('submit').innerText="Cadastrar";
-    }
-  }
-
-  /*function revelarOutros(){
-    var x = document.getElementById("selecao").value;
-    if (x == "Outro"){
-      document.getElementById("oculto").removeAttribute("hidden");
-    }else{
-      document.getElementById("oculto").setAttribute("hidden","hidden");
-    }
-  }*/
-
-  $(function(){
-    $('select[name="marca"]').change(function () { 
-      var valor = $(this).val();
-      if (valor == "Outro"){
-        //$("#oculto").delay(3000);
-        $(".trava1").attr("REQUIRED","REQUIRED");
-        $("#oculto").show(300);
-      }else{
-        $(".trava1").removeAttr("REQUIRED","REQUIRED");
-        $("#oculto").hide(300);
-      }
-    });
-  });
-
-</script>
+<script type="text/javascript" src="./js/cad_equipamento.js"></script>
 
 </html>

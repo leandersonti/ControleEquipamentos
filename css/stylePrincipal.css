@@ -30,7 +30,9 @@ input[name="filtro"],input[name="submit"]{
 #tabelalotacao tr td{
     border:none;
 }
-
+#oculto{
+    display: none;
+}
 /* Daqui pra baixo é tudo culpa do Cley */
 
 input[name=unidade]
@@ -44,9 +46,14 @@ input[name=unidade]
 {
     height: 0;
     display: none;
-    /*overflow: hidden;*/
     transition: all 300ms;
-    -webkit-animation: aparece 2s;
+    -webkit-animation: aparece 1s;
+}
+
+#dados-locacao{
+    height: 0;
+    overflow: hidden;
+    transition: all 300ms;
 }
 
 #field
@@ -70,7 +77,6 @@ input[name=unidade]
 
 #lista
 {
-    /*width: 175px;*/
     padding: 0;
     height: 100px;
     overflow-y: scroll;
@@ -79,6 +85,7 @@ input[name=unidade]
 #groupEmprestimo
 {
     height: 0;
+    margin-bottom: 0;
     overflow: hidden;
     transition: all 300ms;
 }
@@ -115,6 +122,13 @@ input[name=unidade]
     background-repeat: no-repeat;
     -webkit-animation: olho 500ms;
     background-image: url("../imagens/icons/view.svg");
+}
+
+#contPrazo{
+    height: 0;
+    width: 200px;
+    overflow: hidden;
+    transition: all 300ms;
 }
 
 .viewUsuario{display: none;}
@@ -170,7 +184,6 @@ input[name=unidade]
 
 .linha-cabecalho
 {
-    /*height: auto;*/
     font-weight: bold;
     background: #E6E6FA;
 }
@@ -293,7 +306,6 @@ input[name=unidade]
     width: 100%;
     height: 30px;
     display: flex;
-    /*padding: 0 8px;*/
     flex-direction: row;
     align-items: baseline;
     background-color: green;
@@ -319,41 +331,6 @@ input[name=unidade]
 {
     from{ opacity: 1; }
     to{ opacity: 0; }
-}
-
-/* Esse CSS para o flex-box talvez nem seja utilizado 
-//Cley */
-
-#box
-{
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: none;
-    position: fixed;
-    transition: all 1s;
-    background-color: rgba(0, 0, 0, 0.72);
-}
-
-#box-menor
-{
-    width: 30rem;
-    height: 25rem;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #FFF;
-    margin-top: calc(50vh - 12.5rem);
-}
-
-.bt-fechar
-{
-    width: 20px;
-    height: 20px;
-    border: none;
-    float: right;
-    cursor: pointer;
-    background-color: #fff;
 }
 
 /* Tô modificando alguns CSSs do LEANDERSON mas não quero

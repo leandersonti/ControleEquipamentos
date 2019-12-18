@@ -10,7 +10,7 @@ switch ($acao) {
 		sleep(1);
 
 		if (isset($_POST['tipo'])) {
-
+			// Cadastro do equipamento
 			if ($_POST['marca'] == "Outro") {
 				$marca = $_POST['outraMarca'];
 			} else {
@@ -20,16 +20,72 @@ switch ($acao) {
 			$serie = $_POST['num_serie'];
 			$serie = str_replace(" ", "", $serie);
 
+			$status = $_POST['status'];
+			$status_original = $status;
+			if ($status == 4) $status = 1;
+
 			if ($serie != "") {
-				$sql = "INSERT INTO equipamento (num_serie,tipo,descricao,status,condicao_entrada,marca,modelo) VALUES ('" . $serie . "','" . $_POST['tipo'] . "','" . $_POST['descricao'] . "',0,'" . $_POST['condicao_entrada'] . "','" . $marca . "','" . $_POST['modelo'] . "')";
+				$sql = "INSERT INTO equipamento (num_serie,tipo,descricao,status,condicao_entrada,marca,modelo) VALUES ('" . $serie . "','" . $_POST['tipo'] . "','" . $_POST['descricao'] . "',".$status.",'" . $_POST['condicao_entrada'] . "','" . $marca . "','" . $_POST['modelo'] . "')";
 				$consulta = mysqli_query($conn, $sql);
-				if ($consulta) {
-					echo 1;
-				} else {
+				if (!$consulta)
 					echo 2;
-				}
 			} else {
 				echo 3;
+			}
+
+			// Definir equipamento como alocado caso o mesmo já esteja alocado no ato de seu cadastro
+			$dpto = $_POST['local_equipamento'];
+			$responsavel = $_POST['responsavel'];
+			$qtdd = '0'.$_POST['qtdd'];
+			if ($status_original==1)
+			{
+				do
+				{
+					$num_protocolo = date("y")."".$qtdd;
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+
+					$protocolo = intval($num_protocolo);
+					$query = "SELECT protocolo FROM e_lotado WHERE protocolo=".$protocolo;
+					$rs = mysqli_query($conn,$query);
+				}while (mysqli_fetch_object($rs));
+
+				$query = "INSERT INTO e_lotado(protocolo,dpto,responsavel) VALUES(".$protocolo.",'".$dpto."','".$responsavel."')";
+				$insert = mysqli_query($conn,$query);
+				if (!$insert) echo 2;
+
+				$query = "INSERT INTO ligacao(e_num_serie,prot_lotacao,lot_status,data_lotacao) VALUES('".$serie."',".$protocolo.",0,now())";
+				$insert = mysqli_query($conn,$query);
+				if ($insert) echo 1;
+				else echo 2;
+
+			}else if($status_original==4){
+				do
+				{
+					$num_protocolo = date("y")."".$qtdd;
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+					$num_protocolo .= rand(0,9);
+
+					$protocolo = intval($num_protocolo);
+					$query = "SELECT protocolo FROM e_lotado_interior WHERE protocolo=".$protocolo;
+					$rs = mysqli_query($conn,$query);
+				}while (mysqli_fetch_object($rs));
+
+				$query = "INSERT INTO e_lotado_interior(protocolo,unidade,responsavel) VALUES(".$protocolo.",'".$dpto."','".$responsavel."')";
+				$insert = mysqli_query($conn,$query);
+				if (!$insert) echo 2;
+
+				$query = "INSERT INTO ligacao_interior(i_num_serie,prot_lotacao,lot_status,data_lotacao) VALUES('".$serie."',".$protocolo.",0,now())";
+				$insert = mysqli_query($conn,$query);
+				if ($insert) echo 1;
+				else echo 2;
+
 			}
 		}
 
@@ -154,20 +210,15 @@ switch ($acao) {
 		$idexcluir = $_POST['idexcluir'];
 		$flag = true;
 
-		// SETA PARA NULO A CHAVE EXTRANGEIRA //Cley
-		$query = "SELECT lot_status FROM ligacao WHERE e_num_serie='" . $idexcluir . "'";
+		// SETA PARA NULO A CHAVE ESTRANGEIRA
+		$query = "SELECT status FROM equipamento WHERE num_serie='" . $idexcluir . "'";
 		$result = mysqli_query($conn, $query);
-		if (mysqli_fetch_object($result)->lot_status == 0) {
-			$flag = false;
+		if (mysqli_fetch_object($result)->status == 1)
+		{
+			$flag=false;
 			echo 2;
-		} else {
-			$query = "SELECT lot_status FROM ligacao WHERE e_num_serie='" . $idexcluir . "'";
-			$result = mysqli_query($conn, $query);
-			if (mysqli_fetch_object($result)->lot_status == 0) {
-				$flag = false;
-				echo 2;
-			}
 		}
+		
 		if ($flag) {
 			$sql = "DELETE FROM equipamento WHERE num_serie ='" . $idexcluir . "'";
 			$result = mysqli_query($conn, $sql);

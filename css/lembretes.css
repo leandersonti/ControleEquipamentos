@@ -1,0 +1,29 @@
+.container{
+	width: 80%;
+	padding: 5px 0;
+	margin: 15px auto;
+}
+
+.interior{
+	margin-top: 25px;
+}
+
+.titulo{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.mensagem{
+	width: 98%;
+	padding: 5px;
+	height: 68px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	/*border: 1px solid rgba(0,0,0,.7);*/
+}
+
+.verde{border: 2px solid #34E452;/*background-color: #FFFF00;*/}
+
+.laranja{border: 2px solid #FFA500;/*background-color: #FFA500;*/}
+
+.vermelho{border: 2px solid #FF0000;/*background-color: #FF0000;*/}

@@ -1,4 +1,4 @@
-﻿/*Daqui pra baixo é tudo culpa do Cley*/
+/*Daqui pra baixo é tudo culpa do Cley*/
 *{margin: 0; padding: 0;}
 #topo {
 	width: 100%;
@@ -39,3 +39,40 @@
 }
 
 .tituloTopo{font-size: 36px;}
+
+.bolinha{
+	right: 20;
+	top: 5;
+	width: 10px;
+	height: 10px;
+	background: red;
+	position: absolute;
+	border-radius: 100%;
+	animation: floar 1s infinite;
+}
+
+@keyframes floar{
+	0%{
+		margin-top: 0;
+	}
+
+	20%{
+		margin-top: -7px;
+	}
+
+	40%{
+		margin-top: 0;
+	}
+
+	60%{
+		margin-top: -7px;
+	}
+
+	80%{
+		margin-top: 0;
+	}
+
+	100%{
+		margin-top: 0;
+	}
+}

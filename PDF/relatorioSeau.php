@@ -1,16 +1,9 @@
-<?php require '../conn.php'; ?>
-
 <?php
-
-if($_GET['tipo']==1)
-	$tabela = "tabela_equipamento.php";
-else
-	$tabela = "tabela_emprestimo.php";
-
+require '../conn.php';
 $pagina = "<!DOCTYPE html>
 <html>
 <head>
-	<title>Relatório</title>
+	<title>Histórico de Equipamento</title>
 	<style>
 		*{font-family: sans-serif;}
 		table{width: 600px;margin: 0 auto;}
@@ -18,32 +11,18 @@ $pagina = "<!DOCTYPE html>
 		td{padding: 5px;}
 
 		.centro{text-align: center;}
-		.row-cond{background-color: lightblue;}
-		.row-eqp,.row-cond{font-size: 18px;text-align: center;}
+		.colqtdd{text-align: center;}
+		.row-marc{background-color: lightgrey;}
+		.row-eqp,.row-marc{font-size: 18px;text-align: center;}
 		.row-eqp{background-color: skyblue;font-weight: bold;}
 	</style>
 </head>
 <body>";
 
-if($tabela=="tabela_equipamento.php")
-{
-	$query = "SELECT *,COUNT(*) as total FROM equipamento GROUP BY tipo";
-	$result = mysqli_query($conn,$query);
-	while($rs = mysqli_fetch_object($result))
-	{
-		// arquivo vergonha.php possui as consultas referente aos dados das tabelas
-		include 'vergonha.php';
-
-		include $tabela;
-	}
-}else{
-	include 'vergonha.php';
-	
-	include $tabela;
-}
+include 'seauEquipamento.php';
 
 $pagina .= "
-	</body>
+</body>
 </html>";
 
 use Dompdf\Dompdf;
@@ -54,7 +33,7 @@ require_once 'dompdf/autoload.inc.php';
 $dompdf = new Dompdf();
 
 //lendo o arquivo
-$html = file_get_contents('teste.php');
+$html = file_get_contents('historicoPDF.php');
 
 //inserindo o html que queremos converter
 $dompdf->load_html($pagina);
@@ -67,8 +46,7 @@ $dompdf->render();
 
 // Enviando o PDF para o browser
 $dompdf->stream(
-	"teste.pdf",
+	"relatorioSeau.pdf",
 	array("Attachment" => false)
 );
-
 ?>

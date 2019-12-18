@@ -1,3 +1,13 @@
+function exibePrazo(flag)
+{
+	if (flag) document.getElementById('contPrazo').style.height = "38px";
+	else document.getElementById('contPrazo').style.height = "0";
+	document.getElementById('prazoDevolucao').onclick = function()
+	{
+		exibePrazo(!flag);
+	};
+}
+
 function setMaiusculo(input)
 {
 	input.value = input.value.toUpperCase();
@@ -19,11 +29,8 @@ function exibirUnidade(d)
 {
 	if (d=='i')
 	{
-		altura = document.getElementById('formulario_escondido').style.height;
-		altura = altura.replace('px','');
-		altura = parseInt(altura)+64;
-		document.getElementById('formulario_escondido').style.height = altura+"px";
 		document.getElementById('groupEmprestimo').style.height = "63.5px";
+		document.getElementById('groupEmprestimo').style.marginBottom = "1rem";
 
 		document.getElementById('putDpto').value="";
 		document.getElementById('putDpto').style.display="none";
@@ -33,11 +40,8 @@ function exibirUnidade(d)
 	}
 	if (d=='c')
 	{
-		altura = document.getElementById('formulario_escondido').style.height;
-		altura = altura.replace('px','');
-		altura = parseInt(altura)-64;
-		document.getElementById('formulario_escondido').style.height = altura+"px";
 		document.getElementById('groupEmprestimo').style.height = "0";
+		document.getElementById('groupEmprestimo').style.marginBottom = "0";
 
 		document.getElementById('putUnidade').value="";
 		document.getElementById('putDpto').style.display='block';
@@ -51,7 +55,7 @@ function addList(id)
 {
 	let numero = document.getElementsByClassName('item').length;
 
-	if(numero==0) document.getElementById('formulario_escondido').style.height = "469px";
+	if(numero==0) document.getElementById('formulario_escondido').style.height = "max-content";
 	document.getElementById('formulario_escondido').style.display = "block"
 	document.getElementById('stt'+id).style.fontWeight = "bold";
 	document.getElementById('stt'+id).style.color = "gold";
@@ -72,13 +76,10 @@ function addList(id)
 	divEquip.innerText = equipamento;
 
 	div.appendChild(item).className="item";
-	// div.lastChild.innerText = divSerie+" "+divEquip;
 	div.lastChild.appendChild(divSerie).className="divSerie";
 	div.lastChild.appendChild(divEquip).className="divEquip";
 	div.lastChild.appendChild(bt_remove).className="bt_remove";
 	document.getElementById('lotados').value += num_serie+";";
-
-	// document.getElementById(num_serie).innerText="";
 
 	var div_item = document.getElementById('lista').lastChild;
 	div_item.setAttribute("id","item"+id);
@@ -136,7 +137,6 @@ function paginacao(pag)
 	let qtdd = document.getElementsByClassName('linha');
 	let quantitativo = document.getElementById('quantitativo');
 	let totalzao = quantitativo.innerText.split(" de ")[1];
-	// console.log(totalzao);
 
 	let limite = 10;
 	let altura;

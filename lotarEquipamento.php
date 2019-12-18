@@ -7,10 +7,16 @@ if(!isset($_SESSION['titulo']))
 	exit();
 }
 
+$titulo = $_SESSION['titulo'];
+$prazo = "null";
+if ($_POST['prazo']!="")
+	$prazo = "'".$_POST['prazo']."'";
+print_r($prazo);
 ?>
 
 <?php require 'conn.php'; ?>
 <?php
+
 if (isset($_POST['sub_form']))
 {
 	$lista = $_POST['lista'];
@@ -91,7 +97,7 @@ if (isset($_POST['sub_form']))
 
 					for ($i=0; $i < $tam-1; $i++)
 					{
-						$query = "INSERT INTO ligacao_interior (i_num_serie,prot_lotacao,data_lotacao,lot_status) VALUES ('".$nums_serie[$i]."',".$protocolo.",now(),0)";
+						$query = "INSERT INTO ligacao_interior (i_num_serie, prot_lotacao, data_lotacao, lot_status, titulo_locador, prazo) VALUES ('".$nums_serie[$i]."',".$protocolo.",now(),0,'".$titulo."',".$prazo.")";
 						mysqli_query($conn,$query);
 
 						$query = "UPDATE equipamento SET status=1 WHERE num_serie='".$nums_serie[$i]."'";
@@ -115,7 +121,7 @@ if (isset($_POST['sub_form']))
 
 				for ($i=0; $i < $tam-1; $i++)
 				{
-					$query = "INSERT INTO ligacao (e_num_serie,prot_lotacao,data_lotacao,lot_status) VALUES ('".$nums_serie[$i]."',".$protocolo.",now(),0)";
+					$query = "INSERT INTO ligacao (e_num_serie, prot_lotacao, data_lotacao, lot_status, titulo_locador, prazo) VALUES ('".$nums_serie[$i]."',".$protocolo.",now(),0,'".$titulo."',".$prazo.")";
 					mysqli_query($conn,$query);
 
 					$query = "UPDATE equipamento SET status=1 WHERE num_serie='".$nums_serie[$i]."'";
@@ -126,8 +132,6 @@ if (isset($_POST['sub_form']))
 			}else{
 				echo "<script>alert('Preencha todos os campos')</script>";
 			}
-			// sleep(1);
-			// header('Location: lista_equipamento.php?');
 		}else{
 			echo "<script>alert('Todos os equipamentos selecionados devem está disponiveis')</script>";
 		}

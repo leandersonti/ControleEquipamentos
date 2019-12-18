@@ -11,16 +11,16 @@ if(!isset($_SESSION['titulo']))
 
 	switch ($_SESSION['nivel']) {
 		case '1':
-			$tipo_user = "viewUsuario";
-			break;
+		$tipo_user = "viewUsuario";
+		break;
 		
 		case '2':
-			$tipo_user = "viewAdmin";
-			break;
+		$tipo_user = "viewAdmin";
+		break;
 
 		default:
 			# code...
-			break;
+		break;
 	}
 }
 
@@ -47,6 +47,19 @@ if(!isset($_SESSION['titulo']))
 					<li><a href="cad_usuario.php">Cadastrar</a></li>
 					<li><a href="mudar_usuario.php">Modificar</a></li>
 				</ul>
+			</li>
+			<li>
+				<a href="lembrete.php">Lembretes
+					<?php
+					require 'scripts/verificaAlerta.php';
+					if(verificaAlerta())
+					{
+						?>
+						<div class="bolinha"></div>
+						<?php
+					}
+					?>
+				</a>
 			</li>
 		</ul>
 		<div class="bt-logoff" onclick="logout()">

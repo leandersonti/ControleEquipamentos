@@ -9,7 +9,6 @@ session_start();
 
 <script type="text/javascript" src="js/scriptLogin.js" async></script>
 <body id="body">
-
 	<div style="width:max-content; padding:40px;margin:100px auto" class="panel panel-defalt">
 		<form method="post" name="loginUsuario">
 			<label class="title">

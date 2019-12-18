@@ -27,7 +27,7 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 	<input type="hidden" id="fecharPagina" value="0">
 	<input type="hidden" id="totalPaginas" value="<?php echo $maximo ?>">
 
-	<div style="width:80%; margin:100px auto" class="panel panel-defalt">
+	<div style="width:90%; margin:100px auto" class="panel panel-defalt">
 
 		<!-- Formulário de FILTRO //Cley -->
 		<form method="post">
@@ -86,10 +86,8 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 						</div>
 					</div>
 				</div>
-
 				<div id="groupEmprestimo" class="form-group">
 					<label>Tipo de transação:</label>
-					<br>
 					<div class="radios2">
 						<div class="radio">
 							<label for="tipoDefinitivo">Definitivo</label>
@@ -100,6 +98,16 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 							<label for="tipoEmprestado">Empréstimo</label>
 							<input checked type="radio" name="tipoEmprestimo" value="emprestimo" id="tipoEmprestado">
 						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<input type="checkbox" id="prazoDevolucao" onclick="exibePrazo(true)">
+						<label for="prazoDevolucao">Prazo de devolução</label>
+					</div>
+					<div id="contPrazo" class="contPutPrazo">
+						<input id="putPrazo" class="form-control" type="date" name="prazo">
 					</div>
 				</div>
 
@@ -137,6 +145,8 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 		<div id="quantitativo">
 			<?php echo $limite." de ".$qtdd; ?>
 		</div>
+
+		<!-- ******* TABELA DE LISTAGEM DE EQUIPAMENTO ******* -->
 		<div id="tabelinha" class="table">
 			<div class="linha-cabecalho">
 				<div class="coluna">Número de Série</div>
@@ -144,9 +154,10 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 				<div class="coluna">Marca</div>
 				<div class="coluna">Modelo</div>
 				<div class="coluna centrar">Status</div>
-				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Alocar</div>
+				<div class="coluna centrar" style="width:70px">Alocar</div>
 				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Editar</div>
 				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Excluir</div>
+				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Histórico</div>
 			</div>
 			<?php
 			$query = "SELECT * FROM equipamento WHERE status!=4 ORDER BY tipo";
@@ -222,7 +233,7 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 					<div id="stt<?php echo $i ?>" class="coluna">
 						<?php echo $status; ?>
 					</div>
-					<div id="lotar<?php echo $i; ?>" class="coluna link <?php echo $tipo_user; ?>" onclick="addList(<?php echo $i; ?>)" style="width:70px">
+					<div id="lotar<?php echo $i; ?>" class="coluna link" onclick="addList(<?php echo $i; ?>)" style="width:70px">
 						<?php
 						if ($s == 0)
 						{
@@ -239,6 +250,12 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 					<!--excluir equipamento-->
 					<div id="<?php echo $fetch->num_serie; ?>" class="coluna link excluirM <?php echo $tipo_user; ?>" data-toggle="modal" data-target="#modalexcluir" style="width:70px">
 						<img src="imagens/icons/delete.svg" class="icon">
+					</div>
+					<!-- histórico do equipamento -->
+					<div class="coluna link" style="width: 70px;">
+						<a href="gerarHistorico.php?serie=<?php echo $fetch->num_serie; ?>">
+							<img src="imagens/icons/archive.svg" class="icon">
+						</a>
 					</div>
 				</div>
 
@@ -417,15 +434,6 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 		</div>
 
 	</div><!--fim div do painel-->
-
-	<!-- Aqui a light box pra exibir dados do equipamento -->
-	<div id="box">
-		<div id="box-menor">
-			<button onclick="abrefecha(1)" class="bt-fechar">
-				<img class="img-100" src="imagens/icons/cancel.svg">
-			</button>
-		</div>
-	</div>
 
 </body>
 

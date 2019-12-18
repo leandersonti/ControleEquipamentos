@@ -39,7 +39,7 @@ create table ligacao
 	foreign key(titulo_receptor) references usuario(titulo)
 	ON UPDATE cascade ON DELETE set null,
 	foreign key(titulo_locador) references usuario(titulo)
-	ON UPDATE cascade ON DELETE set null,
+	ON UPDATE cascade ON DELETE set null
 );
 
 create table e_lotado_interior

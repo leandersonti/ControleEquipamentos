@@ -1,29 +1,28 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['titulo']))
-{
+if (!isset($_SESSION['titulo'])) {
 	header("Location: index.php");
 	exit();
-}else{
+} else {
 
-	include_once 'scripts/verificaTempo.php';
 
 	switch ($_SESSION['nivel']) {
 		case '1':
-		$tipo_user = "viewUsuario";
-		break;
-		
+			$tipo_user = "viewUsuario";
+			break;
+
 		case '2':
-		$tipo_user = "viewAdmin";
-		break;
+			$tipo_user = "viewAdmin";
+			break;
 
 		default:
 			# code...
-		break;
+			break;
 	}
 }
 
+include_once 'scripts/verificaTempo.php';
 ?>
 
 <div>
@@ -32,7 +31,7 @@ if(!isset($_SESSION['titulo']))
 		<ul>
 
 			<li><a href="cad_equipamento.php">Cadastrar</a>
-			</li>	
+			</li>
 			<li><a href="lista_equipamento.php">Equipamentos</a>
 			</li>
 			<li class="drop1"><a href="#">Empréstimos</a>
@@ -51,13 +50,12 @@ if(!isset($_SESSION['titulo']))
 			<li>
 				<a href="lembrete.php">Lembretes
 					<?php
-					require 'scripts/verificaAlerta.php';
-					if(verificaAlerta())
-					{
-						?>
+								require 'scripts/verificaAlerta.php';
+								if (verificaAlerta()) {
+					?>
 						<div class="bolinha"></div>
-						<?php
-					}
+					<?php
+								}
 					?>
 				</a>
 			</li>
@@ -69,32 +67,31 @@ if(!isset($_SESSION['titulo']))
 
 	<script>
 		$(".drop1")
-		.mouseover(function() {
-			$(".dropdown1").show(100);
-		});
+			.mouseover(function() {
+				$(".dropdown1").show(100);
+			});
 		$(".drop1")
-		.mouseleave(function() {
-			$(".dropdown1").hide(100);     
-		});
+			.mouseleave(function() {
+				$(".dropdown1").hide(100);
+			});
 		$(".drop2")
-		.mouseover(function() {
-			$(".dropdown2").show(100);
-		});
+			.mouseover(function() {
+				$(".dropdown2").show(100);
+			});
 		$(".drop2")
-		.mouseleave(function() {
-			$(".dropdown2").hide(100);     
-		});
+			.mouseleave(function() {
+				$(".dropdown2").hide(100);
+			});
 		$(".drop3")
-		.mouseover(function() {
-			$(".dropdown3").show(100);
-		});
+			.mouseover(function() {
+				$(".dropdown3").show(100);
+			});
 		$(".drop3")
-		.mouseleave(function() {
-			$(".dropdown3").hide(100);     
-		});
+			.mouseleave(function() {
+				$(".dropdown3").hide(100);
+			});
 
-		function logout()
-		{
+		function logout() {
 			window.location.href = "logout.php";
 		}
 	</script>

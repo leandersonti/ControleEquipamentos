@@ -1,5 +1,5 @@
 <?php
-$conn=mysqli_connect("localhost","root","123","controle");
+$conn=mysqli_connect("localhost","root","","controle");
 
 if ($conn)
 {
@@ -7,4 +7,3 @@ if ($conn)
 }else{
 	echo "Errrrrou";
 }
-?>

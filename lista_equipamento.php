@@ -1,5 +1,5 @@
 <?php
-require 'conn.php'; 
+require 'conn.php';
 include_once('head.php');
 include_once('topoLogo.php');
 include_once('menu.php');
@@ -7,22 +7,22 @@ include_once('menu.php');
 $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos exibidos por página na tabela //Cley
 ?>
 <script defer src="scripts/lista_equipamento.js" type="text/javascript"></script>
+
 <body>
 
 	<!-- Inputs do tipo hidden para controlar a paginação feita no JavaScript //Cley -->
 	<input type="hidden" id="inputEscondido" value="1">
 	<?php
 	$sql = "SELECT COUNT(*) AS qtdd FROM equipamento WHERE status!=4";
-	if(isset($_POST['submit']))
-	{
-		if($_POST['tipo']!="")
-			$sql .= " and tipo='".$_POST['tipo']."'";
-		if($_POST['status']!="")
-			$sql .= " and status=".$_POST['status'];
+	if (isset($_POST['submit'])) {
+		if ($_POST['tipo'] != "")
+			$sql .= " and tipo='" . $_POST['tipo'] . "'";
+		if ($_POST['status'] != "")
+			$sql .= " and status=" . $_POST['status'];
 	}
-	$consulta = mysqli_query($conn,$sql);
+	$consulta = mysqli_query($conn, $sql);
 	$rs = mysqli_fetch_object($consulta);
-	$maximo = ceil($rs->qtdd/$limite);
+	$maximo = ceil($rs->qtdd / $limite);
 	?>
 	<input type="hidden" id="fecharPagina" value="0">
 	<input type="hidden" id="totalPaginas" value="<?php echo $maximo ?>">
@@ -42,12 +42,11 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 					<select id="inputEstado" name="tipo" class="form-control">
 						<option value="">Equipamento</option>
 						<?php
-						$query = "SELECT tipo FROM equipamento GROUP BY tipo";
-						$result = mysqli_query($conn,$query);
-						while ($rs = mysqli_fetch_object($result))
-						{
-							echo "<option value='$rs->tipo'>$rs->tipo</option>";
-						}
+													$query = "SELECT tipo FROM equipamento GROUP BY tipo";
+													$result = mysqli_query($conn, $query);
+													while ($rs = mysqli_fetch_object($result)) {
+														echo "<option value='$rs->tipo'>$rs->tipo</option>";
+													}
 						?>
 					</select>
 				</div>
@@ -138,12 +137,12 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 
 		<!-- Obter o total de equipamentos -->
 		<?php
-		$query = "SELECT COUNT(*) as qtdd FROM equipamento WHERE status!=4";
-		$result = mysqli_query($conn,$query);
-		$qtdd = mysqli_fetch_object($result)->qtdd;
+													$query = "SELECT COUNT(*) as qtdd FROM equipamento WHERE status!=4";
+													$result = mysqli_query($conn, $query);
+													$qtdd = mysqli_fetch_object($result)->qtdd;
 		?>
 		<div id="quantitativo">
-			<?php echo $limite." de ".$qtdd; ?>
+			<?php echo $limite . " de " . $qtdd; ?>
 		</div>
 
 		<!-- ******* TABELA DE LISTAGEM DE EQUIPAMENTO ******* -->
@@ -157,65 +156,61 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 				<div class="coluna centrar" style="width:70px">Alocar</div>
 				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Editar</div>
 				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Excluir</div>
-				<div class="coluna centrar <?php echo $tipo_user; ?>" style="width:70px">Histórico</div>
+				<div class="coluna centrar" style="width:70px">Histórico</div>
 			</div>
 			<?php
-			$query = "SELECT * FROM equipamento WHERE status!=4 ORDER BY tipo";
-			if(isset($_POST['submit']))
-			{
-				$query = "SELECT * FROM equipamento WHERE status!=4";
-				if($_POST['tipo']!="")
-					$query .= " and tipo='".$_POST['tipo']."'";
-				if($_POST['status']!="")
-					$query .= " and status=".$_POST['status'];
-				$query .= " ORDER BY tipo";
-			}
-			$result = mysqli_query($conn,$query);
-			$i=0;
-			$pg = 1;
-			$pganterior = 0;
-			$cor = 0;
-			while ($fetch = mysqli_fetch_object($result))
-			{
-				$status = "";
-				$s = $fetch->status;
-				switch ($s)
-				{
-					case 0:
-					$status = "Disponível";
-					break;
+													$query = "SELECT * FROM equipamento WHERE status!=4 ORDER BY tipo";
+													if (isset($_POST['submit'])) {
+														$query = "SELECT * FROM equipamento WHERE status!=4";
+														if ($_POST['tipo'] != "")
+															$query .= " and tipo='" . $_POST['tipo'] . "'";
+														if ($_POST['status'] != "")
+															$query .= " and status=" . $_POST['status'];
+														$query .= " ORDER BY tipo";
+													}
+													$result = mysqli_query($conn, $query);
+													$i = 0;
+													$pg = 1;
+													$pganterior = 0;
+													$cor = 0;
+													while ($fetch = mysqli_fetch_object($result)) {
+														$status = "";
+														$s = $fetch->status;
+														switch ($s) {
+															case 0:
+																$status = "Disponível";
+																break;
 
-					case 1:
-					$status = "Alocado";
-					break;
-					
-					case 2:
-					$status = "Defeituoso";
-					break;
+															case 1:
+																$status = "Alocado";
+																break;
 
-					case 3:
-					$status = "Em manutenção";
-					break;
+															case 2:
+																$status = "Defeituoso";
+																break;
 
-					case 4:
-					$status = "Cedido ao interior";
-					break;
+															case 3:
+																$status = "Em manutenção";
+																break;
 
-					default:
-						# code...
-					break;
-				}
+															case 4:
+																$status = "Cedido ao interior";
+																break;
 
-				if($i%2==0)
-					$cor = 1;
-				else
-					$cor = 0;
-				if ($pganterior!=$pg)
-				{
-					echo "<div id='pg".$pg."' class='pagina'>";
-					$pganterior = $pg;
-				}
-				?>
+															default:
+																# code...
+																break;
+														}
+
+														if ($i % 2 == 0)
+															$cor = 1;
+														else
+															$cor = 0;
+														if ($pganterior != $pg) {
+															echo "<div id='pg" . $pg . "' class='pagina'>";
+															$pganterior = $pg;
+														}
+			?>
 
 				<div class="linha cor<?php echo $cor; ?>">
 					<div id="<?php echo $i; ?>" class="coluna link" onclick='abrefecha(0)'>
@@ -235,12 +230,11 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 					</div>
 					<div id="lotar<?php echo $i; ?>" class="coluna link" onclick="addList(<?php echo $i; ?>)" style="width:70px">
 						<?php
-						if ($s == 0)
-						{
-							?>
+																							if ($s == 0) {
+						?>
 							<img src="imagens/icons/seta_que_vai.svg" class="icon">
-							<?php
-						}
+						<?php
+																							}
 						?>
 					</div>
 					<!--editar equipamento-->
@@ -366,7 +360,7 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 										<label for="exampleFormControlTextarea1">Descrição</label>
 										<textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="3" placeholder="Detalhes a respeito do equipamento"></textarea>
 									</div>
-									<input type="hidden" title="teste"  id="<?php echo $fetch->num_serie; ?>" />
+									<input type="hidden" title="teste" id="<?php echo $fetch->num_serie; ?>" />
 
 								</div>
 								<div class="modal-footer">
@@ -392,31 +386,31 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 								</button>
 							</div>
 							<div class="modal-body">
-								<div class="alert alert-primary esconderex" role="alert" >
+								<div class="alert alert-primary esconderex" role="alert">
 									Confirmar Exclusão?
 								</div>
-								
+
 							</div>
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" value="1">Sim</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-								
+
 							</div>
 
 						</div>
 					</div>
-				</div><!--fim  Modal excluir -->
+				</div>
+				<!--fim  Modal excluir -->
 
 
-				<?php
-				$i++;
-				if($i%$limite==0)
-				{
-					echo "</div>";
-					$pg++;
-				}
-			}
+			<?php
+																							$i++;
+																							if ($i % $limite == 0) {
+																								echo "</div>";
+																								$pg++;
+																							}
+																						}
 			?>
 		</div>
 
@@ -424,52 +418,48 @@ $limite = 10; #!!!!ATENÇÃO!!!! Esta variável define a quantidade de elementos
 			<div onclick="back()" class="btn btn-primary">Anterior</div>
 			<div class="botoes">
 				<?php
-				for ($i=1; $i <= $pganterior; $i++)
-				{
-					echo "<div onclick='paginacao(".$i.")' id='btn".$i."' class='btn btn-primary'>".$i."</div>";
-				}
+																						for ($i = 1; $i <= $pganterior; $i++) {
+																							echo "<div onclick='paginacao(" . $i . ")' id='btn" . $i . "' class='btn btn-primary'>" . $i . "</div>";
+																						}
 				?>
 			</div>
 			<div onclick="next()" class="btn btn-primary">Próximo</div>
 		</div>
 
-	</div><!--fim div do painel-->
+	</div>
+	<!--fim div do painel-->
 
 </body>
 
 <?php
-if (isset($_GET['edit']))
-{
-	echo "<script async>alert('Informações do equipamento editadas!')</script>";
-}
-if (isset($_GET['excluido']))
-{
-	echo "<script>alert('Equipamento excluido!')</script>";
-}
+																						if (isset($_GET['edit'])) {
+																							echo "<script async>alert('Informações do equipamento editadas!')</script>";
+																						}
+																						if (isset($_GET['excluido'])) {
+																							echo "<script>alert('Equipamento excluido!')</script>";
+																						}
 
-if(isset($_GET['protocolo']))
-{
-	echo "<script>alert('O número de protocolo é ".$_GET['protocolo'].". Anote-o!')</script>";
-}
+																						if (isset($_GET['protocolo'])) {
+																							echo "<script>alert('O número de protocolo é " . $_GET['protocolo'] . ". Anote-o!')</script>";
+																						}
 ?>
 
 <script>
-	$(function(){
-		$('select[name="marca"]').change(function () { 
+	$(function() {
+		$('select[name="marca"]').change(function() {
 			var valor = $(this).val();
-			if (valor == "Outro"){
+			if (valor == "Outro") {
 				$("#oculto").show(300);
-			}else{
+			} else {
 				$("#oculto").hide(300);
 			}
 		});
 	});
 
-	function removeMarca()
-	{
+	function removeMarca() {
 		selecao = document.getElementById('selecao');
 		marca = selecao.lastChild.innerText;
-		if(marca != 'Outro')
+		if (marca != 'Outro')
 			document.getElementById('selecao').removeChild(selecao.lastChild);
 	}
 </script>
